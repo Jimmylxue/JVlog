@@ -3,12 +3,15 @@ import { Link } from 'expo-router'
 
 export default function Index() {
 	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>这里是首页</Text>
+		<View
+			className=" mt-4"
+			style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+		>
+			<Text className=" text-red-300">这里是首页</Text>
 			<Link href="/details" style={{ marginTop: 40 }}>
 				跳转到详情页
 			</Link>
-			<Link href="/example" style={{ marginTop: 40 }}>
+			<Link href="/drawer" style={{ marginTop: 40 }}>
 				跳转到example
 			</Link>
 
