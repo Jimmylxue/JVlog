@@ -1,23 +1,23 @@
 import React, { useRef } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import ImageViewer from './components/ImageViewer'
-import Button from './components/Button'
+import ImageViewer from '../components/base/ImageViewer'
+import Button from '../components/base/Button'
 import * as ImagePicker from 'expo-image-picker'
 import { useState } from 'react'
-import IconButton from './components/IconButton'
-import CircleButton from './components/CircleButton'
-import EmojiPicker from './components/EmojiPicker'
-import EmojiList from './components/EmojiList'
-import EmojiSticker from './components/EmojiSticker'
+import IconButton from '../components/base/IconButton'
+import CircleButton from '../components/base/CircleButton'
+import EmojiPicker from '../components/base/EmojiPicker'
+import EmojiList from '../components/base/EmojiList'
+import EmojiSticker from '../components/base/EmojiSticker'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import * as MediaLibrary from 'expo-media-library'
 import { captureRef } from 'react-native-view-shot'
 import domtoimage from 'dom-to-image'
 
-const PlaceholderImage = require('../../assets/images/background-image.png')
+const PlaceholderImage = require('../assets/images/background-image.png')
 
-export default function App() {
+export default function Index() {
 	const imageRef = useRef<any>()
 
 	const [status, requestPermission] = MediaLibrary.usePermissions()

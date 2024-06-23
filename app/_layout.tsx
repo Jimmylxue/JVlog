@@ -22,9 +22,9 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		if (loaded) {
-			// SplashScreen.hideAsync()
+			SplashScreen.hideAsync()
 			// 延长启动页的时间
-			setTimeout(SplashScreen.hideAsync, 5000)
+			// setTimeout(SplashScreen.hideAsync, 5000)
 		}
 	}, [loaded])
 
@@ -35,8 +35,9 @@ export default function RootLayout() {
 	return (
 		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 			<Stack>
-				<Stack.Screen name="(example)" options={{ headerShown: false }} />
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+				<Stack.Screen name="example" options={{ headerShown: false }} />
+				<Stack.Screen name="index" options={{ headerShown: false }} />
 				<Stack.Screen name="+not-found" />
 			</Stack>
 		</ThemeProvider>
