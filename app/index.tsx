@@ -1,34 +1,46 @@
-import { View, Text, Button } from 'react-native'
-import { Link } from 'expo-router'
+import { View } from 'react-native'
+import Button from '@/components/base/Button'
+import { router } from 'expo-router'
+import Toast from 'react-native-toast-message'
 
 export default function Index() {
 	return (
 		<View
-			className=" mt-4"
+			className=" w-screen h-screen bg-[#25292e]"
 			style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
 		>
-			<Text className=" text-red-300">这里是首页</Text>
-			<Link href="/details" style={{ marginTop: 40 }}>
-				跳转到详情页
-			</Link>
-			<Link href="/drawer" style={{ marginTop: 40 }}>
-				跳转到example
-			</Link>
-
-			<Link href="/home" style={{ marginTop: 40 }}>
-				跳转到TAB
-			</Link>
-
-			<Link href="/explore" style={{ marginTop: 40 }}>
-				跳转到TAB2
-			</Link>
-
-			<Link href="/login" style={{ marginTop: 40 }}>
-				跳转到登录
-			</Link>
-			<Link href="/details">
-				<Button title="跳转到详情页（使用按钮）" />
-			</Link>
+			<Button
+				theme="primary"
+				iconName="picture-o"
+				onPress={() => {
+					router.push('/drawer')
+				}}
+			>
+				Start Vlog
+			</Button>
+			<Button
+				className="mt-4"
+				theme="primary"
+				iconName="angellist"
+				onPress={() => {
+					console.log('GGGG')
+					Toast.show({
+						type: 'info',
+						text1: 'This is an info message',
+					})
+					// let toast = Toast.show('Request failed to send.', {
+					// 	duration: Toast.durations.LONG,
+					// })
+					// // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
+					// setTimeout(function hideToast() {
+					// 	Toast.hide(toast)
+					// }, 500)
+					// alert('Coming soon!')
+				}}
+			>
+				Exciting Moments~~
+			</Button>
+			{/* <Toast visible={true}>Thanks for subscribing!</Toast> */}
 		</View>
 	)
 }

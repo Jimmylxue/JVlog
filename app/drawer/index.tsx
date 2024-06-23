@@ -121,15 +121,12 @@ export default function Index() {
 				</View>
 			) : (
 				<View style={styles.footerContainer}>
-					<Button
-						theme="primary"
-						label="Choose a photo"
-						onPress={pickImageAsync}
-					/>
-					<Button
-						label="Use this photo"
-						onPress={() => setShowAppOptions(true)}
-					/>
+					<Button theme="primary" onPress={pickImageAsync}>
+						Choose a photo
+					</Button>
+					<Button onPress={() => setShowAppOptions(true)}>
+						Use this photo
+					</Button>
 				</View>
 			)}
 			<StatusBar style="auto" />

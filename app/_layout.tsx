@@ -12,7 +12,8 @@ import 'react-native-reanimated'
 import '@/styles/global.css'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
-
+// import Toast from 'react-native-root-toast'
+import Toast from 'react-native-toast-message'
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
 
@@ -42,6 +43,7 @@ export default function RootLayout() {
 				<Stack.Screen name="index" options={{ headerShown: false }} />
 				<Stack.Screen name="+not-found" />
 			</Stack>
+			<Toast />
 		</ThemeProvider>
 	)
 }
