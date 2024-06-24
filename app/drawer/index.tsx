@@ -3,7 +3,6 @@ import { View, StyleSheet, Platform } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import ImageViewer from '@/components/base/ImageViewer'
 import Button from '@/components/base/Button'
-import * as ImagePicker from 'expo-image-picker'
 import { useState } from 'react'
 import IconButton from '@/components/base/IconButton'
 import CircleButton from '@/components/base/CircleButton'
@@ -14,36 +13,22 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import * as MediaLibrary from 'expo-media-library'
 import { captureRef } from 'react-native-view-shot'
 import domtoimage from 'dom-to-image'
+import { ChoosePicture } from '@/biz/drawer/ChoosePicture'
 
 const PlaceholderImage = require('@/assets/images/background-image.png')
 
 export default function Index() {
 	const imageRef = useRef<any>()
-
 	const [status, requestPermission] = MediaLibrary.usePermissions()
-
 	const [selectedImage, setSelectedImage] = useState<string | null>(null)
 	const [showAppOptions, setShowAppOptions] = useState<boolean>(false)
 	const [isModalVisible, setIsModalVisible] = useState(false)
 	const [pickedEmoji, setPickedEmoji] = useState(null)
 
+	const [chooseModalShow, setChooseModalShow] = useState<boolean>(false)
+
 	if (status === null) {
 		requestPermission()
-	}
-
-	const pickImageAsync = async () => {
-		let result = await ImagePicker.launchImageLibraryAsync({
-			allowsEditing: true,
-			quality: 1,
-		})
-
-		if (!result.canceled) {
-			console.log(result)
-			setSelectedImage(result.assets[0].uri)
-			setShowAppOptions(true)
-		} else {
-			alert('You did not select any image.')
-		}
 	}
 
 	const onReset = () => {
@@ -108,21 +93,24 @@ export default function Index() {
 			</EmojiPicker>
 
 			{showAppOptions ? (
-				<View style={styles.optionsContainer}>
-					<View style={styles.optionsRow}>
-						<IconButton icon="refresh" label="Reset" onPress={onReset} />
-						<CircleButton onPress={onAddSticker} />
-						<IconButton
-							icon="save-alt"
-							label="Save"
-							onPress={onSaveImageAsync}
-						/>
-					</View>
+				<View className=" absolute w-full bottom-[80] left-0 flex-row justify-between items-center px-20">
+					<IconButton icon="reload1" label="Reset" onPress={onReset} />
+					<CircleButton
+						iconName="plus"
+						theme="primary"
+						onPress={onAddSticker}
+					/>
+					<IconButton icon="download" label="Save" onPress={onSaveImageAsync} />
 				</View>
 			) : (
 				<View style={styles.footerContainer}>
-					<Button theme="primary" onPress={pickImageAsync}>
-						Choose a photo
+					<Button
+						theme="primary"
+						onPress={() => {
+							setChooseModalShow(true)
+						}}
+					>
+						Take Picture
 					</Button>
 					<Button onPress={() => setShowAppOptions(true)}>
 						Use this photo
@@ -130,6 +118,16 @@ export default function Index() {
 				</View>
 			)}
 			<StatusBar style="auto" />
+			<ChoosePicture
+				visible={chooseModalShow}
+				onClose={() => {
+					setChooseModalShow(false)
+				}}
+				onGetImageSource={uri => {
+					setSelectedImage(uri)
+					setShowAppOptions(true)
+				}}
+			/>
 		</GestureHandlerRootView>
 	)
 }
@@ -139,6 +137,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#25292e',
 		alignItems: 'center',
+		position: 'relative',
 	},
 	imageContainer: {
 		flex: 1,
@@ -147,13 +146,5 @@ const styles = StyleSheet.create({
 	footerContainer: {
 		flex: 1 / 3,
 		alignItems: 'center',
-	},
-	optionsContainer: {
-		position: 'absolute',
-		bottom: 80,
-	},
-	optionsRow: {
-		alignItems: 'center',
-		flexDirection: 'row',
 	},
 })

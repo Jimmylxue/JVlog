@@ -1,25 +1,42 @@
 import { View, Pressable, StyleSheet } from 'react-native'
-import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import AntDesign from '@expo/vector-icons/AntDesign'
+import classNames from 'classnames'
 
 type TProps = {
 	onPress: () => void
+	theme?: 'primary'
+	iconName: string
+	size?: 'sm' | 'md' | 'lg'
 }
 
-export default function CircleButton({ onPress }: TProps) {
+export default function CircleButton({
+	size = 'lg',
+	theme,
+	iconName,
+	onPress,
+}: TProps) {
 	return (
-		<View style={styles.circleButtonContainer}>
+		<View
+			className={classNames('', {
+				'size-[84]': size === 'lg',
+				'size-[64]': size === 'md',
+				'size-[44]': size === 'sm',
+			})}
+			style={theme === 'primary' ? styles.primaryStyle : {}}
+		>
 			<Pressable style={styles.circleButton} onPress={onPress}>
-				<MaterialIcons name="add" size={38} color="#25292e" />
+				<AntDesign
+					name={(iconName as any) || 'add'}
+					size={38}
+					color="#25292e"
+				/>
 			</Pressable>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	circleButtonContainer: {
-		width: 84,
-		height: 84,
-		marginHorizontal: 60,
+	primaryStyle: {
 		borderWidth: 4,
 		borderColor: '#ffd33d',
 		borderRadius: 42,

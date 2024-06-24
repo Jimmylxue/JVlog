@@ -1,14 +1,19 @@
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import Button from '@/components/base/Button'
 import { router } from 'expo-router'
 import Toast from 'react-native-toast-message'
+import { HelloWave } from '@/components/HelloWave'
+import { StatusBar } from 'expo-status-bar'
 
 export default function Index() {
 	return (
-		<View
-			className=" w-screen h-screen bg-[#25292e]"
-			style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-		>
+		<View className=" w-screen h-full bg-[#25292e] justify-center items-center">
+			<StatusBar style="auto" />
+			<View className=" flex-row mb-5">
+				<Text className=" text-white text-3xl">Come on! Miss cheese 🧀</Text>
+				<HelloWave />
+			</View>
+
 			<Button
 				theme="primary"
 				iconName="picture-o"
@@ -23,24 +28,18 @@ export default function Index() {
 				theme="primary"
 				iconName="angellist"
 				onPress={() => {
-					console.log('GGGG')
 					Toast.show({
 						type: 'info',
-						text1: 'This is an info message',
+						text1: 'Coming soon!',
 					})
-					// let toast = Toast.show('Request failed to send.', {
-					// 	duration: Toast.durations.LONG,
-					// })
-					// // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
-					// setTimeout(function hideToast() {
-					// 	Toast.hide(toast)
-					// }, 500)
-					// alert('Coming soon!')
 				}}
 			>
-				Exciting Moments~~
+				Exciting Moments
 			</Button>
-			{/* <Toast visible={true}>Thanks for subscribing!</Toast> */}
+
+			<View className=" absolute bottom-10">
+				<Text className=" text-white text-sm">design by jimmy</Text>
+			</View>
 		</View>
 	)
 }
