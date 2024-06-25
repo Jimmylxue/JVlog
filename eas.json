@@ -17,7 +17,12 @@
     "ios": {
       "resourceClass": "m1-medium"
     }
-    }
+    },
+    "release": {
+            "android": {
+                "buildType": "apk"
+            }
+        }
   },
   "submit": {
     "production": {}
